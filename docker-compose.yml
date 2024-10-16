@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  express-app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    command: tunnel --label edge=edghts_2UK09zMrfHUSsPHAx3sC4aDG8Lg http://express-app:3000
+    depends_on:
+      - express-app
+    environment:
+      - NGROK_AUTHTOKEN=2T4OcKgj519NtqFMhxI4kOrG7uY_2W81NN6mjvUSTNWQiBYr2
